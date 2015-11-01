@@ -1,18 +1,31 @@
-from django.shortcuts import render
 
-# Create your views here.
-from matplotlib import pylab
-from pylab import *
+from django.http import HttpResponse
+from django.template.loader import get_template
+from django.template import Context	
+from  django.views.generic.base import TemplateView
+from django.shortcuts import render_to_response
+def hello(request) :
+	name = "Aryan"
+	html = "<html> <body> Hi %s, This seems to have worked </body> </html>" %name
+	return HttpResponse(html) 
 
-def graph() :
-	x = [1,2,3,4,5,6]
-	y = [5,2,6,8,2,7]
-	plot(x,y,linewidth=2)
 
-	xlabel('x axis')
-	ylabel(' y asis')
-	title('sample graph')
-	grid(True)
-	pylab.show()
 
- 
+def hello_template(request) :
+	name = "Aryan"
+	t  = get_template('hello.html')
+	html = t.render(Context({'name' : name}))
+	return HttpResponse(html) 
+
+class HelloTemplate(TemplateView):
+ 	template_name = 'hello_class.html'
+
+ 	def get_context_data(self, **kwargs) :
+ 	 	context = super(HelloTemplate,self).get_context_data(**kwargs)
+ 	 	context['name'] = 'Aryan'
+ 	 	return context
+
+
+def hello_template_simple(request):
+	name  = 'Aryan'
+	return render_to_response('hello.html' , {'name':name})

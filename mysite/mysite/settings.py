@@ -55,7 +55,9 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'mysite.urls'
 
 TEMPLATES = [
-    {
+    {    
+    #/Users/aryan_000/Documents/GitHub/First-Python-Project/mysite/blog/templates ,
+
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
         'APP_DIRS': True,
